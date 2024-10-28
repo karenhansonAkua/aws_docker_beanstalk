@@ -1,0 +1,47 @@
+DOCKER
+💡 How do I know which version of Docker I should download?
+If you're unsure of which chip/settings option to pick for your device:
+
+Mac: Select the Apple icon from the top left hand corner of your computer's menu bar. Select About this Mac, and note whether your Chip says Apple or Intel.
+
+Windows: Click the Start button and search for System Information. Note whether your System Type says x64-based or ARM-based PC.
+
+Linux: Open a terminal and run uname -m. Note whether the output says x86_64 or aarch64/arm64.
+
+
+💡 How do I know which version of Docker I should download?
+If you're unsure of which chip/settings option to pick for your device:
+
+Mac: Select the Apple icon from the top left hand corner of your computer's menu bar. Select About this Mac, and note whether your Chip says Apple or Intel.
+
+Windows: Click the Start button and search for System Information. Note whether your System Type says x64-based or ARM-based PC.
+
+Linux: Open a terminal and run uname -m. Note whether the output says x86_64 or aarch64/arm64.
+
+
+💡 What do these commands do?docker run starts a new container. We're using a pre-existing container image called nginx and we're starting this container in detached mode (-d) so it runs in the background. Then, this -p 80:80 maps port 80 on your host machine to port 80 in the container, which means you'll be able to access the webpage that Nginx is running through your computer's web browser..
+
+
+ 💡 What is Nginx?Nginx (pronounced as "engine-x") is a web server, which means it's a program that serves web pages to people on the internet. Engineers use Nginx because it can handle lots of web traffic smoothly and efficiently. Sometimes, you might hear Nginx referred to as a 'proxy server', which means it can also be used to forward requests from the internet to other servers, helping balance the load or handle more users.. 
+
+
+💡 What's a container image?A container image is a template used to create containers. It contains the application code, libraries, dependencies, and other files needed to run the application.. You can make multiple, identical containers from the same image, and all of those containers will behave the same way regardless of where it's deployed (as long as there is a container platform e.g. Docker to run the container).. This is great for developers working in a team, because it means everyone gets the same experience with an application that they're all running on their individual computers. We're less likely to see situations where an application only works for some members in the team and not for others. It's also a lot faster for new team members to get up to speed with running the applications they need for their project to work.
+
+
+💡 Woah! How did I end up seeing this Nginx welcome page?Typing localhost in your browser means you want to connect to the server software running on your own local machine.. Since you've mapped port 80 of your machine to port 80 in the container that's running (this happened when you ran -p 80:80 nginx earlier in this step), the server software that localhost is connected to is the Nginx server inside the container.. That's why you see the default Nginx webpage!.
+
+
+ 💡 How does localhost know to use port 80?Web browsers automatically assume you're referring to port 80 when you don't specify a port number. So when you type localhost into your browser, it's essentially the same as typing localhost:80.
+
+💡 What is a Dockerfile?
+A Dockerfile is a document with all the instructions for building your Docker image. Docker would read a Dockerfile to understand how to set up your application's environment and which software packages it should install.. 
+
+
+💡 What do these commands do?
+. cd ~/Desktop/Compute navigates your terminal to your Compute folder.. touch Dockerfile creates an empty file called Dockerfile in the current directory i.e. the Compute folder.
+
+
+The first line, FROM nginx:latest, means our image starts as a copy of the latest Nginx image, but we'll make a few modifications/additions to it to customise it for what we need. Think of it like you're copying an existing cheesecake recipe (the Nginx image) and adding your own twist to it (your modifications, specified in the Dockerfile)! The modified recipe creates a new dish, but luckily you didn't have to write the entire recipe from scratch..
+
+
+ Then, the next two lines in the Dockerfile customizes the base Nginx image:. COPY index.html /usr/share/nginx/html/ replaces the default HTML file provided by Nginx with your own custom index.html file, so you're customizing the Nginx server to serve your own web content.. EXPOSE 80 means you want the container to receive web traffic through port 80, which makes it easier for users and other services to reach your web app. Remember this, it's going to be important in the next step! 👀
